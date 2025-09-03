@@ -59,8 +59,9 @@ export default async function handler(req, res) {
 
     try {
         // 2. Pega as credenciais seguras e obtém o Access Token
-        const APP_ID = process.env.SHOPEE_APP_ID;
-        const API_KEY = process.env.SHOPEE_API_KEY;
+       const APP_ID = process.env.ID_do_aplicativo_da_SHOPEE;
+       const API_KEY = process.env.CHAVE_API_SHOPEE;
+
 
         if (!APP_ID || !API_KEY) {
             throw new Error('Credenciais da Shopee não configuradas na Vercel.');
@@ -105,3 +106,4 @@ export default async function handler(req, res) {
         res.status(500).json({ error: 'Falha ao buscar produtos na Shopee.' });
     }
 }
+
