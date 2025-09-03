@@ -23,10 +23,9 @@ export default async function handler(req, res) {
 
     // 4. Monta a URL final para a busca na API da Shopee
     const url = new URL(host + path);
-    url.searchParams.append('app_id', APP_ID);
+    url.searchParams.append('keywords', searchTerm);
     url.searchParams.append('timestamp', timestamp);
     url.searchParams.append('sign', sign);
-    url.searchParams.append('search_deep_link', `https://shopee.com.br/search?keyword=${encodeURIComponent(searchTerm )}`);
     url.searchParams.append('page_size', 20); // Busca 20 itens por vez
 
     try {
@@ -46,3 +45,4 @@ export default async function handler(req, res) {
         res.status(500).json({ error: 'Falha ao buscar produtos na Shopee.' });
     }
 }
+
