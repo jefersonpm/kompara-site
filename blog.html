@@ -8,14 +8,14 @@
     <meta name="keywords" content="Shopee, comparar preços, ofertas, descontos, cupons, Kompara, compras online, promoções 2025">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://kompara.com.br/blog.html">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilo principal do site Kompara -->
+    <link rel="stylesheet" href="estilo.css">
 
-    <!-- Open Graph -->
+    <!-- Open Graph para Redes Sociais -->
     <meta property="og:title" content="Blog Kompara: Guia Definitivo para Encontrar as Melhores Ofertas na Shopee">
     <meta property="og:description" content="Aprenda como economizar na Shopee com dicas, cupons e o comparador de preços Kompara.">
-    <meta property="og:image" content="https://kompara.com.br/blog-destaque.png">
+    <meta property="og:image" content="https://www.kompara.com.br/imagens/blog-destaque-guia-shopee.png"> <!-- Use um link de imagem real -->
     <meta property="og:url" content="https://kompara.com.br/blog.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Kompara">
@@ -24,9 +24,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Blog Kompara: Guia Definitivo para Encontrar as Melhores Ofertas na Shopee">
     <meta name="twitter:description" content="Aprenda como economizar na Shopee com dicas, cupons e o comparador de preços Kompara.">
-    <meta name="twitter:image" content="https://kompara.com.br/blog-destaque.png">
+    <meta name="twitter:image" content="https://www.kompara.com.br/imagens/blog-destaque-guia-shopee.png"> <!-- Use um link de imagem real -->
 
-    <!-- JSON-LD SEO -->
+    <!-- JSON-LD para SEO Avançado -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -39,115 +39,195 @@
         "name": "Kompara",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://kompara.com.br/logo.png"
+          "url": "https://www.kompara.com.br/imagens/logo.png"
         }
-      },
-      "blogPost": {
-        "@type": "BlogPosting",
-        "headline": "Guia Definitivo: Como Encontrar as Melhores Ofertas na Shopee em 2025",
-        "image": "https://kompara.com.br/blog-destaque.png",
-        "author": {
-          "@type": "Person",
-          "name": "Kompara"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Kompara"
-        },
-        "datePublished": "2025-09-03"
       }
     }
     </script>
 
+    <!-- Estilos específicos para a página do blog -->
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f9f9f9;
+            background-color: #f0f2f5; /* Um cinza claro para o fundo */
         }
-        .carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 20px;
-            padding: 20px;
+        .blog-main-container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 1rem;
         }
-        .carousel article {
-            flex: 0 0 300px;
-            scroll-snap-align: start;
+        .blog-post {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08 );
+            margin-bottom: 3rem;
+        }
+        .blog-post h1, .blog-post h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .blog-post h1 { font-size: 2.25rem; }
+        .blog-post h2 { font-size: 1.75rem; margin-top: 2rem; }
+        .blog-post p {
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        .post-meta {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+        }
+        .post-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .share-buttons a {
+            display: inline-block;
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .share-buttons a:hover {
+            transform: translateY(-2px);
+        }
+        .twitter { background-color: #1DA1F2; }
+        .facebook { background-color: #1877F2; }
+        .whatsapp { background-color: #25D366; }
+
+        .recent-posts-section h2 {
+            font-size: 2rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .posts-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .carousel-card {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.2s;
         }
-        .carousel img {
+        .carousel-card:hover {
+            transform: translateY(-5px);
+        }
+        .carousel-card img {
             width: 100%;
             height: 150px;
             object-fit: cover;
-            border-radius: 5px;
+        }
+        .carousel-card-content {
+            padding: 1rem;
+        }
+        .carousel-card h3 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .carousel-card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .carousel-card a {
+            color: var(--cor-principal); /* Usa a cor laranja do seu site */
+            font-weight: bold;
+            text-decoration: none;
         }
     </style>
 </head>
-<body class="text-gray-800">
-    <header class="bg-orange-500 text-white text-center py-8">
-        <img src="https://kompara.com.br/logo.png" alt="Logo Kompara" class="mx-auto max-w-xs">
-        <h1 class="text-3xl font-bold mt-4">Blog Kompara</h1>
-        <p class="mt-2">Dicas, guias e as melhores ofertas para suas compras na Shopee.</p>
+<body>
+    <!-- Cabeçalho consistente com o site -->
+    <header class="cabecalho">
+        <a href="index.html">
+            <img src="imagens/logo.png" alt="Logo Kompara" class="logo">
+        </a>
+        <nav class="rodape-links"> <!-- Reutilizando a classe para manter o estilo -->
+            <a href="index.html">Início</a>
+            <a href="blog.html">Blog</a>
+        </nav>
     </header>
 
-    <main class="max-w-5xl mx-auto py-12 px-4">
-        <article class="bg-white p-6 rounded-lg shadow-lg mb-12">
-            <h1 class="text-3xl font-bold mb-4">Guia Definitivo: Como Encontrar as Melhores Ofertas na Shopee em 2025</h1>
-            <p class="text-sm text-gray-500 mb-4"><strong>Publicado em 03 de Setembro de 2025</strong></p>
-            <img src="https://kompara.com.br/blog-destaque.png" alt="Ofertas Shopee" class="w-full h-64 object-cover rounded-lg mb-6">
-            <p class="mb-4">Cansado de perder promoções? Neste guia completo, vamos ensinar todos os segredos para economizar de verdade na Shopee, desde o uso de cupons até as melhores estratégias para o dia a dia.</p>
+    <main class="blog-main-container">
+        <!-- Artigo Principal -->
+        <article class="blog-post">
+            <h1>Guia Definitivo: Como Encontrar as Melhores Ofertas na Shopee em 2025</h1>
+            <p class="post-meta">Publicado em 03 de Setembro de 2025 por <strong>Jeferson (Kompara)</strong></p>
+            <img src="imagens/blog-destaque-guia-shopee.png" alt="Mulher feliz segurando sacolas de compras da Shopee" class="post-image">
+            
+            <p>Cansado de perder promoções relâmpago? Sente que está pagando mais caro do que deveria? Neste guia completo, vamos desvendar todos os segredos para você se tornar um mestre da economia na Shopee.</p>
 
-            <h2 class="text-2xl font-semibold mt-6 mb-2">1. Use cupons e promoções diárias</h2>
-            <p class="mb-4">Aprenda a identificar e utilizar os cupons certos, garantindo descontos extras em todas as suas compras.</p>
+            <h2>1. O Poder dos Cupons: Mais do que Apenas Descontos</h2>
+            <p>A Shopee é um universo de cupons: frete grátis, descontos de vendedor, cupons da plataforma... Aprenda a empilhá-los! Sempre verifique a Central de Cupons antes de finalizar a compra e não se esqueça das Moedas Shopee, que podem ser usadas para abater ainda mais o valor.</p>
 
-            <h2 class="text-2xl font-semibold mt-6 mb-2">2. Compare preços com o Kompara</h2>
-            <p class="mb-4">Nosso site ajuda você a encontrar o menor preço em segundos, evitando que você pague mais do que deveria.</p>
+            <h2>2. Kompara: Sua Arma Secreta para Comparar Preços</h2>
+            <p>Achar o menor preço pode ser um trabalho de tempo integral. É por isso que criamos o <strong>Kompara</strong>. Com nossa ferramenta, você busca o produto desejado e nós mostramos as melhores ofertas disponíveis em segundos. É a garantia de que você está fazendo o melhor negócio, sem esforço.</p>
 
-            <h2 class="text-2xl font-semibold mt-6 mb-2">3. Estratégias avançadas de compra</h2>
-            <p class="mb-4">Descubra técnicas para planejar suas compras, aproveitar frete grátis e combinar promoções para maximizar suas economias.</p>
-
-            <p class="mt-4"><a href="https://kompara.com.br/blog.html#leiamais" class="text-orange-500 hover:underline">Leia mais →</a></p>
+            <h2>3. Estratégias Avançadas: Pense como um Caçador de Ofertas</h2>
+            <p>Planeje suas compras para as grandes datas promocionais (10.10, 11.11, Black Friday). Adicione itens ao carrinho com antecedência e fique de olho nas "Ofertas Relâmpago". Muitas vezes, comprar de madrugada ou nos primeiros minutos de uma promoção garante os melhores preços e estoques.</p>
 
             <!-- Botões de compartilhamento social -->
-            <div class="mt-6 flex gap-4">
-                <a href="https://twitter.com/intent/tweet?url=https://kompara.com.br/blog.html&text=Confira o guia definitivo para economizar na Shopee com o Kompara!" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Compartilhar no Twitter</a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://kompara.com.br/blog.html" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800">Compartilhar no Facebook</a>
-                <a href="https://api.whatsapp.com/send?text=Confira o guia definitivo para economizar na Shopee com o Kompara! https://kompara.com.br/blog.html" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Compartilhar no WhatsApp</a>
+            <div class="share-buttons" style="margin-top: 2rem; display: flex; gap: 1rem;">
+                <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.kompara.com.br%2Fblog.html&text=Guia%20definitivo%20para%20economizar%20na%20Shopee%20com%20o%20Kompara!" target="_blank" class="twitter">Compartilhar no Twitter</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.kompara.com.br%2Fblog.html" target="_blank" class="facebook">Compartilhar no Facebook</a>
+                <a href="https://api.whatsapp.com/send?text=Confira%20o%20guia%20definitivo%20para%20economizar%20na%20Shopee%20com%20o%20Kompara!%20https%3A%2F%2Fwww.kompara.com.br%2Fblog.html" target="_blank" class="whatsapp">Compartilhar no WhatsApp</a>
             </div>
         </article>
 
-        <!-- Carrossel de posts recentes -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-4">Posts Recentes</h2>
-            <div class="carousel">
-                <article>
-                    <img src="https://kompara.com.br/post1.png" alt="Post 1">
-                    <h3 class="text-lg font-semibold mt-2">5 Dicas para Economizar no Frete</h3>
-                    <p class="text-sm text-gray-600">Saiba como conseguir frete grátis na Shopee.</p>
-                    <a href="https://kompara.com.br/post1.html" class="text-orange-500 hover:underline">Leia mais →</a>
+        <!-- Seção de Posts Recentes -->
+        <section class="recent-posts-section">
+            <h2>Explore Mais Dicas</h2>
+            <div class="posts-carousel">
+                <article class="carousel-card">
+                    <img src="imagens/post-frete.png" alt="Caixa de entrega com símbolo de frete grátis">
+                    <div class="carousel-card-content">
+                        <h3>5 Dicas para Economizar no Frete</h3>
+                        <p>Saiba como conseguir frete grátis na Shopee.</p>
+                        <a href="#">Leia mais &rarr;</a>
+                    </div>
                 </article>
-                <article>
-                    <img src="https://kompara.com.br/post2.png" alt="Post 2">
-                    <h3 class="text-lg font-semibold mt-2">Os Melhores Cupons de 2025</h3>
-                    <p class="text-sm text-gray-600">Descubra os cupons mais vantajosos do ano.</p>
-                    <a href="https://kompara.com.br/post2.html" class="text-orange-500 hover:underline">Leia mais →</a>
+                <article class="carousel-card">
+                    <img src="imagens/post-cupons.png" alt="Tesoura cortando um cupom de desconto">
+                    <div class="carousel-card-content">
+                        <h3>Os Melhores Cupons de 2025</h3>
+                        <p>Descubra os cupons mais vantajosos do ano.</p>
+                        <a href="#">Leia mais &rarr;</a>
+                    </div>
                 </article>
-                <article>
-                    <img src="https://kompara.com.br/post3.png" alt="Post 3">
-                    <h3 class="text-lg font-semibold mt-2">Como Evitar Golpes na Shopee</h3>
-                    <p class="text-sm text-gray-600">Dicas para comprar com segurança.</p>
-                    <a href="https://kompara.com.br/post3.html" class="text-orange-500 hover:underline">Leia mais →</a>
+                <article class="carousel-card">
+                    <img src="imagens/post-seguranca.png" alt="Cadeado sobre um teclado de computador">
+                    <div class="carousel-card-content">
+                        <h3>Como Evitar Golpes na Shopee</h3>
+                        <p>Dicas para comprar com segurança.</p>
+                        <a href="#">Leia mais &rarr;</a>
+                    </div>
                 </article>
             </div>
         </section>
     </main>
 
-    <footer class="bg-orange-500 text-white text-center py-6">
-        <p>© 2025 Kompara - Todos os direitos reservados.</p>
+    <!-- Rodapé consistente com o site -->
+    <footer class="rodape">
+        <div class="rodape-links">
+            <a href="index.html">Início</a>
+            <a href="blog.html">Blog</a>
+            <a href="#">Sobre Nós</a>
+            <a href="#">Contato</a>
+        </div>
+        <div class="rodape-copyright">
+            <p>&copy; 2025 Kompara - Todos os direitos reservados.</p>
+        </div>
     </footer>
 </body>
 </html>
