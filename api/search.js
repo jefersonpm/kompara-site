@@ -1,6 +1,7 @@
-// /api/search.js - Versão final e correta usando GraphQL
+// /api/search.js - Versão Final e Definitiva (GraphQL com Autenticação por Signature)
 
 const fetch = require('node-fetch');
+const crypto = require('crypto');
 
 // O endpoint único da API GraphQL da Shopee Afiliados Brasil
 const SHOPEE_GRAPHQL_ENDPOINT = 'https://open-api.affiliate.shopee.com.br/graphql';
@@ -24,8 +25,7 @@ export default async function handler(req, res ) {
         return res.status(500).json({ error: 'Erro de configuração no servidor.' });
     }
 
-    // 3. Monta a "pergunta" (query) em formato GraphQL
-    // Esta query busca por produtos usando a palavra-chave e pede vários campos úteis.
+    // 3. Prepara a query GraphQL e o timestamp
     const graphqlQuery = {
         query: `
             query getProductOffers($keyword: String) {
@@ -48,18 +48,25 @@ export default async function handler(req, res ) {
         }
     };
 
+    const timestamp = Math.floor(Date.now() / 1000);
+    const payload = JSON.stringify(graphqlQuery); // O corpo da requisição como texto
+
+    // 4. Calcula a Signature (Assinatura) conforme a documentação
+    const baseString = `${APP_ID}${timestamp}${payload}${API_KEY}`;
+    const signature = crypto.createHmac('sha256', API_KEY).update(baseString).digest('hex');
+
+    // 5. Monta o Header de Autorização no formato exato exigido
+    const authorizationHeader = `SHA256 Credential=${APP_ID}, Timestamp=${timestamp}, Signature=${signature}`;
+
     try {
-        // 4. Faz a chamada para a API da Shopee
+        // 6. Faz a chamada para a API
         const shopeeResponse = await fetch(SHOPEE_GRAPHQL_ENDPOINT, {
             method: 'POST',
-            // 5. Adiciona os cabeçalhos (headers) com as credenciais
             headers: {
                 'Content-Type': 'application/json',
-                'AppId': APP_ID,
-                'ApiKey': API_KEY,
+                'Authorization': authorizationHeader, // <-- Usa o header de autorização calculado
             },
-            // 6. Envia a query GraphQL no corpo da requisição
-            body: JSON.stringify(graphqlQuery),
+            body: payload,
         });
 
         const data = await shopeeResponse.json();
