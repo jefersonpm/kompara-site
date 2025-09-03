@@ -71,7 +71,7 @@ export default async function handler(req, res) {
 
         // 4. Cria a "assinatura" de segurança
         const baseString = `${APP_ID}${path}${timestamp}${accessToken}`;
-        const sign = crypto.createHmac('sha26', API_KEY).update(baseString).digest('hex');
+        const sign = crypto.createHmac('sha256', API_KEY).update(baseString).digest('hex');
 
         // 5. Monta a URL final para a busca na API da Shopee
         const url = new URL(host + path);
@@ -99,3 +99,4 @@ export default async function handler(req, res) {
         res.status(500).json({ error: 'Falha ao buscar produtos na Shopee.' });
     }
 }
+
