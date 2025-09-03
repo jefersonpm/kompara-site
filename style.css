@@ -1,0 +1,288 @@
+/* Reset e Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFFFFF;
+    color: #212121;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabeçalho */
+.cabecalho {
+    width: 100%;
+    height: 40px; /* Altura reduzida para ser mais sutil */
+    background-color: #FF5722;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    flex-shrink: 0; /* Impede que o cabeçalho encolha */
+}
+
+/* Container Principal */
+.container-principal {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.logo-container {
+    margin-bottom: 25px; /* Espaço entre logo/slogan e a busca */
+}
+
+.logomarca-principal {
+    max-width: 372px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.slogan {
+    color: #FF5722; /* Cor da Shopee */
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Área de Busca */
+.area-busca {
+    width: 100%;
+    max-width: 584px;
+    margin: 0 auto; /* Centraliza a área de busca */
+}
+
+.campo-busca-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#campo-busca {
+    width: 100%;
+    padding: 12px 100px 12px 20px; /* Espaço para os ícones à direita */
+    border-radius: 24px;
+    border: 1px solid #dfe1e5;
+    font-size: 16px;
+    outline: none;
+}
+
+#campo-busca:hover, #campo-busca:focus {
+    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+    border-color: rgba(223,225,229,0);
+}
+
+.icones-busca {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.icone-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botoes-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-principal, .btn-secundario {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn-principal {
+    background-color: #FF5722;
+    color: white;
+}
+
+.btn-principal:hover {
+    background-color: #E64A19;
+}
+
+.btn-secundario {
+    background-color: #0088cc;
+    color: white;
+}
+
+.btn-secundario:hover {
+    background-color: #0077b3;
+}
+
+.btn-convite {
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043;
+    font-family: arial,sans-serif;
+    font-size: 14px;
+    margin: 11px 4px;
+    padding: 10px 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn-convite:hover {
+    border: 1px solid #dadce0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+/* Área de Resultados */
+.area-resultados {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.titulo-resultados {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.grid-resultados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card-produto {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-produto:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-imagem {
+    width: 100%;
+    padding-top: 100%; /* Proporção 1:1 */
+    position: relative;
+    background-color: #f5f5f5;
+}
+
+.card-imagem img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-nome {
+    font-size: 14px;
+    line-height: 1.4;
+    height: 3.9em; /* Aproximadamente 3 linhas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+
+.card-preco {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FF5722;
+    margin-top: auto; /* Empurra o preço para baixo */
+    margin-bottom: 15px;
+}
+
+.card-botao {
+    background-color: #FF5722;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.card-botao:hover {
+    background-color: #E64A19;
+}
+
+/* Rodapé */
+.rodape {
+    background-color: #FF5722;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    width: 100%;
+    flex-shrink: 0; /* Impede que o rodapé encolha */
+}
+
+.rodape-links {
+    margin-bottom: 20px;
+}
+
+.rodape-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+.rodape-links a:hover {
+    text-decoration: underline;
+}
+
+.rodape-copyright p {
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.8;
+}

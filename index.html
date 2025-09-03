@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompara - O Comparador Nº 1 de preços da Shopee!</title>
+    <meta name="description" content="Encontre os melhores preços e ofertas da Shopee em segundos. O Kompara busca as melhores oportunidades para você economizar.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/logotipo.png" type="image/png">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <!-- Conteúdo do cabeçalho, se houver, como "Parceiro Oficial Shopee" -->
+    </header>
+
+    <div class="container-principal">
+        <div class="logo-container">
+            <img src="images/logo-completa.png" alt="Logomarca Kompara" class="logomarca-principal">
+            <h1 class="slogan">O Comparador Nº 1 de preços da Shopee!</h1>
+        </div>
+
+        <div class="area-busca">
+            <div class="campo-busca-container">
+                <input type="text" id="campo-busca" placeholder="Digite o nome do produto ou cole o link">
+                <div class="icones-busca">
+                    <button class="icone-btn" id="busca-voz" aria-label="Busca por voz"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"></path></svg></button>
+                    <button class="icone-btn" id="busca-imagem" aria-label="Busca por imagem"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M20 4v12h-4l-3.5-4.5-2.5 3-3.5-4.5-4 5V4c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2zm-2 10l-3.5-4.5-2.5 3-3.5-4.5-4 5V5c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v9zM4 22h16v-2H4v2z"></path></svg></button>
+                </div>
+            </div>
+            <div class="botoes-container">
+                <button id="btn-comparar" class="btn-principal">COMPARAR PREÇOS</button>
+                <a href="https://t.me/+-NKFQy_nGutiODgx" target="_blank" id="btn-telegram" class="btn-secundario">
+                    <svg height="20" viewBox="0 0 24 24" width="20" fill="white" style="margin-right: 8px;"><path d="M9.78 18.65l.28-4.23-7.68-2.43c-.46-.14-.56-.54-.12-.82l17.56-8.98c.37-.19.72.05.55.51l-3.64 16.25c-.12.54-.57.68-.96.42l-4.42-3.27-2.13 2.05c-.23.23-.44.43-.7.43z"></path></svg>
+                    Participe do Nosso Canal
+                </a>
+            </div>
+             <button id="btn-convidar" class="btn-convite">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="currentColor" style="margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
+                Convidar um amigo
+            </button>
+        </div>
+    </div>
+
+    <div id="area-resultados" class="area-resultados" style="display: none;">
+        <h2 class="titulo-resultados">Encontramos estas ofertas para você:</h2>
+        <div id="grid-resultados" class="grid-resultados">
+            <!-- Os cards de produtos simulados serão inseridos aqui pelo JavaScript -->
+        </div>
+    </div>
+
+    <footer class="rodape">
+        <div class="rodape-links">
+            <a href="#">Sobre Nós</a>
+            <a href="#">Blog</a>
+            <a href="#">Contato</a>
+            <a href="#">Termos de Uso</a>
+            <a href="#">Política de Privacidade</a>
+        </div>
+        <div class="rodape-copyright">
+            <p>© 2025 Kompara - Todos os direitos reservados.</p>
+            <p>Como Parceiro Oficial da Shopee, podemos receber comissões por compras qualificadas originadas por esta ferramenta.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
