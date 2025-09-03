@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompara</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <!-- ÁREA DO CABEÇALHO SEM TEXTO, CONFORME SOLICITADO -->
+    </header>
+
+    <main class="container-principal">
+        <div class="logo-container">
+            <!-- 
+                LINHA CORRIGIDA PARA O CAMINHO E NOME EXATO DA SUA IMAGEM:
+                "images/logo-completa.png"
+            -->
+            <img src="images/logo-completa.png" alt="Logomarca Kompara" class="logomarca-principal">
+            
+            <p class="slogan">O Comparador Nº 1 de preços da Shopee!</p>
+        </div>
+
+        <div class="area-busca">
+            <div class="campo-busca-container">
+                <i class="fa-solid fa-magnifying-glass icone-lupa"></i>
+                <input type="text" id="campo-produto" class="campo-busca-input" placeholder="Digite o nome do produto ou cole o link">
+                <div class="icones-busca">
+                    <button class="botao-icone" title="Busca por teclado virtual (função indisponível )"><i class="fa-solid fa-keyboard"></i></button>
+                    <button class="botao-icone" title="Busca por voz (função indisponível)"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="botao-icone" title="Busca por imagem (função indisponível)"><i class="fa-solid fa-camera"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-botoes">
+            <button id="botao-comparar" class="botao-principal">COMPARAR PREÇOS</button>
+            <button id="botao-convidar" class="botao-secundario" title="Convide um amigo para economizar!"><i class="fa-solid fa-user-plus"></i><span>Convidar um amigo</span></button>
+            <a href="https://t.me/+-NKFQy_nGutiODgx" id="botao-telegram" class="botao-telegram" target="_blank">
+                <i class="fa-brands fa-telegram"></i>
+                <span>Participe do Nosso Canal</span>
+            </a>
+        </div>
+    </main>
+
+    <section id="area-resultados" class="area-resultados" style="display: none;">
+        <h2 class="titulo-resultados">Encontramos estas ofertas para você:</h2>
+        <div id="grid-resultados" class="grid-resultados">
+            <!-- Os resultados da busca serão inseridos aqui pelo JavaScript -->
+        </div>
+    </section>
+
+    <footer id="rodape" class="rodape">
+        <div class="rodape-links">
+            <a href="#">Sobre Nós</a>
+            <a href="#">Blog</a>
+            <a href="#">Contato</a>
+            <a href="#">Termos de Uso</a>
+            <a href="#">Política de Privacidade</a>
+        </div>
+        <div class="rodape-copyright">
+            <p>© 2025 Kompara - Todos os direitos reservados.</p>
+            <p>Como Parceiro Oficial da Shopee, podemos receber comissões por compras qualificadas originadas por esta ferramenta.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
