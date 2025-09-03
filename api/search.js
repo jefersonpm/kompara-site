@@ -1,116 +1,80 @@
-// /api/search.js - Versão definitiva com fallback universal
-const fetch = require("node-fetch");
-const crypto = require("crypto");
+// /api/search.js - Versão final e correta usando GraphQL
 
-// --- Cache do Access Token ---
-let cachedToken = {
-  accessToken: null,
-  expiresAt: 0,
-};
+const fetch = require('node-fetch');
 
-// --- Função para obter Access Token ---
-async function getAccessToken(appId, apiKey) {
-  const now = Math.floor(Date.now() / 1000);
-
-  if (cachedToken.accessToken && now < cachedToken.expiresAt) {
-    console.log("✅ Usando Access Token do cache.");
-    return cachedToken.accessToken;
-  }
-
-  console.log("🔑 Gerando novo Access Token da Shopee...");
-  const host = "https://open-api.affiliate.shopee.com.br";
-  const path = "/api/v3/token/get";
-  const baseString = `${appId}${path}${now}`;
-  const sign = crypto.createHmac("sha256", apiKey).update(baseString).digest("hex");
-
-  const authUrl = `${host}${path}?app_id=${appId}&timestamp=${now}&sign=${sign}`;
-  const response = await fetch(authUrl);
-  const data = await response.json();
-
-  if (data.error || !data.data || !data.data.access_token) {
-    console.error("❌ Falha ao obter Access Token. Resposta da Shopee:", data);
-    throw new Error("Não foi possível autenticar com a API da Shopee.");
-  }
-
-  console.log("✅ Novo Access Token gerado com sucesso!");
-  cachedToken.accessToken = data.data.access_token;
-  cachedToken.expiresAt = now + data.data.expire_in - 300; // margem de 5 min
-  return cachedToken.accessToken;
-}
+// O endpoint único da API GraphQL da Shopee Afiliados Brasil
+const SHOPEE_GRAPHQL_ENDPOINT = 'https://open-api.affiliate.shopee.com.br/graphql';
 
 // --- Handler Principal ---
-export default async function handler(req, res) {
-  const { searchTerm } = req.query;
+export default async function handler(req, res ) {
+    // 1. Pega o termo de busca da URL (ex: /api/search?searchTerm=fralda)
+    const { searchTerm } = req.query;
 
-  if (!searchTerm) {
-    return res.status(400).json({ error: "Termo de busca é obrigatório" });
-  }
+    if (!searchTerm) {
+        return res.status(400).json({ error: 'Termo de busca é obrigatório' });
+    }
 
-  try {
-    // --- Captura das variáveis (com fallback universal) ---
-    const APP_ID =
-      process.env.SHOPEE_APP_ID ||
-      process.env.ID_do_aplicativo_da_SHOPEE ||
-      process.env.APP_ID ||
-      null;
-
-    const API_KEY =
-      process.env.SHOPEE_API_KEY ||
-      process.env.CHAVE_APT_SHOPEE ||
-      process.env.API_KEY ||
-      null;
-
-    // Logs de depuração (sem expor valores)
-    console.log("🔍 Variáveis detectadas:");
-    console.log(" - SHOPEE_APP_ID:", !!process.env.SHOPEE_APP_ID);
-    console.log(" - ID_do_aplicativo_da_SHOPEE:", !!process.env.ID_do_aplicativo_da_SHOPEE);
-    console.log(" - SHOPEE_API_KEY:", !!process.env.SHOPEE_API_KEY);
-    console.log(" - CHAVE_APT_SHOPEE:", !!process.env.CHAVE_APT_SHOPEE);
-
-    console.log("➡️ APP_ID usado:", APP_ID ? "OK" : "NÃO ENCONTRADO");
-    console.log("➡️ API_KEY usada:", API_KEY ? "OK" : "NÃO ENCONTRADO");
+    // 2. Pega as credenciais das variáveis de ambiente da Vercel
+    // Usando o fallback para garantir que funcione com qualquer nome que a Vercel use.
+    const APP_ID = process.env.SHOPEE_APP_ID || process.env.ID_do_aplicativo_da_SHOPEE;
+    const API_KEY = process.env.SHOPEE_API_KEY || process.env.CHAVE_API_SHOPEE;
 
     if (!APP_ID || !API_KEY) {
-      throw new Error(
-        "Nenhuma credencial válida da Shopee foi encontrada nas variáveis da Vercel."
-      );
+        console.error('ERRO: Credenciais da Shopee não encontradas nas variáveis de ambiente.');
+        return res.status(500).json({ error: 'Erro de configuração no servidor.' });
     }
 
-    // --- Access Token ---
-    const accessToken = await getAccessToken(APP_ID, API_KEY);
+    // 3. Monta a "pergunta" (query) em formato GraphQL
+    // Esta query busca por produtos usando a palavra-chave e pede vários campos úteis.
+    const graphqlQuery = {
+        query: `
+            query getProductOffers($keyword: String) {
+                productOfferV2(params: {keyword: $keyword, limit: 20}) {
+                    nodes {
+                        productName
+                        description
+                        originPrice
+                        salePrice
+                        imageUrl
+                        commissionRate
+                        commission
+                        marketingLink
+                    }
+                }
+            }
+        `,
+        variables: {
+            keyword: searchTerm
+        }
+    };
 
-    // --- Requisição de Busca ---
-    const host = "https://open-api.affiliate.shopee.com.br";
-    const path = "/api/v3/product/search";
-    const timestamp = Math.floor(Date.now() / 1000);
-    const baseString = `${APP_ID}${path}${timestamp}${accessToken}`;
-    const sign = crypto.createHmac("sha256", API_KEY).update(baseString).digest("hex");
+    try {
+        // 4. Faz a chamada para a API da Shopee
+        const shopeeResponse = await fetch(SHOPEE_GRAPHQL_ENDPOINT, {
+            method: 'POST',
+            // 5. Adiciona os cabeçalhos (headers) com as credenciais
+            headers: {
+                'Content-Type': 'application/json',
+                'AppId': APP_ID,
+                'ApiKey': API_KEY,
+            },
+            // 6. Envia a query GraphQL no corpo da requisição
+            body: JSON.stringify(graphqlQuery),
+        });
 
-    const url = new URL(host + path);
-    url.searchParams.append("app_id", APP_ID);
-    url.searchParams.append("access_token", accessToken);
-    url.searchParams.append("timestamp", timestamp);
-    url.searchParams.append("sign", sign);
-    url.searchParams.append("keywords", searchTerm);
-    url.searchParams.append("page_size", 20);
+        const data = await shopeeResponse.json();
 
-    console.log("📡 Enviando requisição para Shopee:", url.toString());
+        // 7. Verifica se a resposta da Shopee contém erros
+        if (data.errors) {
+            console.error('Erro retornado pela API GraphQL da Shopee:', data.errors);
+            throw new Error('A API da Shopee retornou um erro.');
+        }
 
-    const shopeeResponse = await fetch(url.toString());
-    const data = await shopeeResponse.json();
+        // 8. Envia a lista de produtos de volta para o seu site
+        res.status(200).json(data.data.productOfferV2.nodes);
 
-    if (data.error) {
-      console.error(
-        "❌ Erro retornado pela API da Shopee:",
-        data.error,
-        data.message
-      );
-      throw new Error(data.message || data.error);
+    } catch (error) {
+        console.error('Erro geral na função /api/search:', error.message);
+        res.status(500).json({ error: 'Falha ao se comunicar com a Shopee.' });
     }
-
-    res.status(200).json(data.data.product_offer_list || []);
-  } catch (error) {
-    console.error("🔥 Erro geral na função /api/search:", error.message);
-    res.status(500).json({ error: "Falha ao buscar produtos na Shopee." });
-  }
 }
