@@ -1,4 +1,4 @@
-// /api/search.js - Versão Final Unificada (Boas Práticas + Autenticação Correta)
+// /api/search.js - Versão de Teste (Busca Geral, sem Keyword)
 
 import fetch from 'node-fetch';
 import crypto from 'crypto';
@@ -6,42 +6,34 @@ import crypto from 'crypto';
 const SHOPEE_GRAPHQL_ENDPOINT = 'https://open-api.affiliate.shopee.com.br/graphql';
 
 export default async function handler(req, res ) {
-    const { searchTerm } = req.query;
+    // Para este teste, não vamos usar o searchTerm.
+    // const { searchTerm } = req.query;
 
-    if (!searchTerm) {
-        return res.status(400).json({ error: 'Termo de busca é obrigatório' });
-    }
-
-    const APP_ID = process.env.SHOPEE_APP_ID || process.env.ID_do_aplicativo_da_SHOPEE;
-    const API_KEY = process.env.SHOPEE_API_KEY || process.env.CHAVE_API_SHOPEE;
+    const APP_ID = process.env.SHOPEE_APP_ID;
+    const API_KEY = process.env.SHOPEE_API_KEY;
 
     if (!APP_ID || !API_KEY) {
-        console.error('ERRO CRÍTICO: Credenciais da Shopee não encontradas.');
         return res.status(500).json({ error: 'Erro de configuração no servidor.' });
     }
 
-    // Query GraphQL usando 'variables' para segurança (sugestão do GPT)
+    // --- INÍCIO DA ALTERAÇÃO (Sugestão do Grok) ---
+    // Query para buscar ofertas gerais, sem palavra-chave, usando os parâmetros padrão.
     const graphqlQuery = {
         query: `
-            query getProductOffers($keyword: String!) {
-                productOfferV2(params: {keyword: $keyword, limit: 20}) {
+            query getGeneralOffers {
+                productOfferV2(listType: 0, sortType: 2, page: 0, limit: 20) {
                     nodes {
                         productName
-                        description
-                        originPrice
                         salePrice
                         imageUrl
-                        commissionRate
-                        commission
                         marketingLink
                     }
                 }
             }
-        `,
-        variables: {
-            keyword: searchTerm
-        }
+        `
+        // Note que não há 'variables' aqui, pois não estamos usando uma.
     };
+    // --- FIM DA ALTERAÇÃO ---
 
     const timestamp = Math.floor(Date.now() / 1000);
     const payload = JSON.stringify(graphqlQuery);
@@ -59,12 +51,6 @@ export default async function handler(req, res ) {
             body: payload,
         });
 
-        // Checagem de status da resposta (sugestão do GPT)
-        if (!shopeeResponse.ok) {
-            console.error(`Erro de rede da Shopee. Status: ${shopeeResponse.status}`);
-            throw new Error(`A Shopee retornou um status de erro: ${shopeeResponse.status}`);
-        }
-
         const data = await shopeeResponse.json();
 
         if (data.errors) {
@@ -72,6 +58,7 @@ export default async function handler(req, res ) {
             throw new Error('A API da Shopee retornou um erro após a autenticação.');
         }
 
+        // Se chegarmos aqui, SUCESSO!
         res.status(200).json(data.data.productOfferV2.nodes || []);
 
     } catch (error) {
