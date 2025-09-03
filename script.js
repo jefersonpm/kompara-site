@@ -1,83 +1,91 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const campoProduto = document.getElementById('campo-produto');
-    const botaoComparar = document.getElementById('botao-comparar');
+document.addEventListener('DOMContentLoaded', function() {
+    const campoBusca = document.getElementById('campo-busca');
+    const btnComparar = document.getElementById('btn-comparar');
     const areaResultados = document.getElementById('area-resultados');
     const gridResultados = document.getElementById('grid-resultados');
-    const rodape = document.getElementById('rodape');
-    const botaoConvidar = document.getElementById('botao-convidar');
+    const rodape = document.querySelector('.rodape');
+    const btnConvidar = document.getElementById('btn-convidar');
 
-    // Função para lidar com a busca (clique no botão ou Enter)
-    const iniciarBusca = () => {
-        const termoBusca = campoProduto.value.trim();
-        if (termoBusca === "") {
-            alert("Por favor, digite o nome de um produto.");
+    // Função para executar a busca
+    const executarBusca = () => {
+        const termoBusca = campoBusca.value.trim();
+        if (termoBusca === '') {
+            alert('Por favor, digite o nome de um produto ou cole um link.');
             return;
         }
 
-        // Simulação de busca
-        botaoComparar.textContent = 'BUSCANDO OFERTAS...';
-        botaoComparar.disabled = true;
+        btnComparar.textContent = 'BUSCANDO OFERTAS...';
+        btnComparar.disabled = true;
 
+        // SIMULAÇÃO DE CHAMADA DE API
         setTimeout(() => {
-            exibirResultadosSimulados();
-            botaoComparar.textContent = 'COMPARAR PREÇOS';
-            botaoComparar.disabled = false;
-        }, 2000); // Simula um delay de 2 segundos da API
+            // Limpa resultados antigos
+            gridResultados.innerHTML = '';
+
+            // Dados simulados (mock)
+            const resultadosSimulados = [
+                { nome: 'Capa de Silicone para Celular Modelo X Super Resistente e Flexível', preco: 25.90, imagem: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-lkwcrw8e4mlg29' },
+                { nome: 'Fone de Ouvido Bluetooth 5.0 com Cancelamento de Ruído e Case Carregadora', preco: 89.99, imagem: 'https://down-br.img.susercontent.com/file/sg-11134201-22110-q8i3g4v12gjv8b' },
+                { nome: 'Smartwatch Relógio Inteligente Monitor Cardíaco e Oxímetro', preco: 150.00, imagem: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-lkvj267a0z62d7' },
+                { nome: 'Kit 10 Pincéis de Maquiagem Profissional Sereia com Cerdas Macias', preco: 45.50, imagem: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-lkyh2jmqb0o28c' },
+                { nome: 'Garrafa Térmica de Inox 500ml para Café, Chá e Água Quente ou Fria', preco: 55.00, imagem: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-ll1ple35d216d7' },
+                { nome: 'Luminária de Mesa LED Articulável com 3 Níveis de Intensidade', preco: 78.90, imagem: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-lkyh30m5c7d21c' }
+            ];
+
+            // Ordena os resultados do mais barato para o mais caro
+            resultadosSimulados.sort((a, b ) => a.preco - b.preco);
+
+            // Cria e insere os cards de produto no HTML
+            resultadosSimulados.forEach(produto => {
+                const card = document.createElement('a');
+                card.href = '#'; // Link para a oferta real
+                card.className = 'card-produto';
+                card.target = '_blank';
+
+                card.innerHTML = `
+                    <div class="card-imagem">
+                        <img src="${produto.imagem}" alt="${produto.nome}">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-nome">${produto.nome}</h3>
+                        <p class="card-preco">R$ ${produto.preco.toFixed(2).replace('.', ',')}</p>
+                        <div class="card-botao">Ver Oferta na Shopee</div>
+                    </div>
+                `;
+                gridResultados.appendChild(card);
+            });
+
+            // Mostra a área de resultados e o rodapé
+            areaResultados.style.display = 'block';
+            rodape.style.display = 'block';
+
+            // Rola a página suavemente até a área de resultados
+            areaResultados.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Restaura o botão
+            btnComparar.textContent = 'COMPARAR PREÇOS';
+            btnComparar.disabled = false;
+
+        }, 2000); // Atraso de 2 segundos para simular a busca
     };
 
-    // Adiciona o evento de clique ao botão de comparar
-    botaoComparar.addEventListener('click', iniciarBusca);
+    // Adiciona o evento de clique no botão
+    btnComparar.addEventListener('click', executarBusca);
 
     // Adiciona o evento de "Enter" no campo de busca
-    campoProduto.addEventListener('keydown', (event) => {
+    campoBusca.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
-            iniciarBusca();
+            executarBusca();
         }
     });
 
-    // Função para exibir resultados simulados
-    const exibirResultadosSimulados = () => {
-        const produtos = [
-            { nome: 'Fone de Ouvido Bluetooth com Cancelamento de Ruído', preco: 129.90, imagem: 'img/produto1.jpg', link: '#' },
-            { nome: 'Smartwatch com Monitor Cardíaco e GPS Integrado', preco: 249.50, imagem: 'img/produto2.jpg', link: '#' },
-            { nome: 'Teclado Mecânico Gamer RGB com Switch Blue', preco: 189.99, imagem: 'img/produto3.jpg', link: '#' },
-            { nome: 'Câmera de Segurança Wi-Fi Full HD com Visão Noturna', preco: 99.80, imagem: 'img/produto4.jpg', link: '#' },
-            { nome: 'Mouse Gamer sem Fio com 16000 DPI e 8 Botões', preco: 155.00, imagem: 'img/produto5.jpg', link: '#' },
-            { nome: 'Luminária de Mesa LED Articulável com Carregador USB', preco: 79.90, imagem: 'img/produto6.jpg', link: '#' }
-        ];
-
-        // Ordena os produtos pelo menor preço
-        produtos.sort((a, b) => a.preco - b.preco);
-
-        gridResultados.innerHTML = ''; // Limpa resultados anteriores
-
-        produtos.forEach(produto => {
-            const card = `
-                <div class="card-produto">
-                    <img src="${produto.imagem}" alt="${produto.nome}" class="card-imagem">
-                    <div class="card-corpo">
-                        <h3 class="card-nome">${produto.nome}</h3>
-                        <p class="card-preco">R$ ${produto.preco.toFixed(2).replace('.', ',')}</p>
-                        <a href="${produto.link}" class="card-botao" target="_blank">Ver Oferta na Shopee</a>
-                    </div>
-                </div>
-            `;
-            gridResultados.innerHTML += card;
-        });
-
-        areaResultados.style.display = 'block';
-        rodape.style.display = 'block'; // Garante que o rodapé apareça com os resultados
-        areaResultados.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-
-    // FUNCIONALIDADE CIRÚRGICA DO BOTÃO DE CONVITE
-    // Verifica se o navegador suporta a Web Share API
+    // Funcionalidade do botão de convite
     if (navigator.share) {
-        botaoConvidar.addEventListener('click', async () => {
+        btnConvidar.addEventListener('click', async () => {
             try {
                 await navigator.share({
-                    title: 'Convite para o Kompara',
-                    text: 'Estou te convidando para usar o Kompara, a ferramenta que eu uso para encontrar os menores preços na Shopee. Vale muito a pena!',
+                    title: 'Kompara - O Comparador de Preços da Shopee',
+                    text: 'Encontrei um comparador de preços incrível para a Shopee. Vale muito a pena!',
                     url: window.location.href
                 });
             } catch (error) {
@@ -86,6 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } else {
         // Esconde o botão se a funcionalidade não for suportada pelo navegador
-        botaoConvidar.style.display = 'none';
+        btnConvidar.style.display = 'none';
     }
 });

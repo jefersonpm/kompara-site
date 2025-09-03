@@ -1,23 +1,27 @@
-/* Reset Básico e Estilos Globais */
+/* Reset e Configurações Globais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: #FFFFFF;
     color: #212121;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
 /* Cabeçalho */
 .cabecalho {
     width: 100%;
-    height: 60px;
+    height: 40px; /* Altura reduzida para ser mais sutil */
     background-color: #FF5722;
     display: flex;
     align-items: center;
@@ -25,6 +29,7 @@ body {
     color: white;
     font-size: 14px;
     font-weight: 500;
+    flex-shrink: 0; /* Impede que o cabeçalho encolha */
 }
 
 /* Container Principal */
@@ -36,126 +41,136 @@ body {
     justify-content: center;
     padding: 20px;
     text-align: center;
+    width: 100%;
 }
 
 .logo-container {
-    /* AJUSTE CIRÚRGICO: Reduz a margem inferior para aproximar do bloco de busca */
-    margin-bottom: 15px; 
+    margin-bottom: 25px; /* Espaço entre logo/slogan e a busca */
 }
 
 .logomarca-principal {
-    max-width: 272px; /* Tamanho inspirado no Google */
+    max-width: 372px;
+    width: 100%;
     height: auto;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 .slogan {
-    /* AJUSTE CIRÚRGICO: Altera a cor para o laranja da Shopee e aumenta o peso */
-    color: #FF5722;
-    font-size: 16px;
-    font-weight: 500; /* Um pouco mais de destaque */
+    color: #FF5722; /* Cor da Shopee */
+    font-size: 18px;
+    font-weight: 500;
 }
 
 /* Área de Busca */
 .area-busca {
     width: 100%;
-    max-width: 584px; /* Largura inspirada no Google */
-    margin: 20px 0;
+    max-width: 584px;
+    margin: 0 auto; /* Centraliza a área de busca */
 }
 
 .campo-busca-container {
     position: relative;
-    display: flex;
-    align-items: center;
-    border: 1px solid #dfe1e5;
-    border-radius: 24px;
-    height: 44px;
-    background-color: white;
+    margin-bottom: 20px;
 }
-.campo-busca-container:hover {
+
+#campo-busca {
+    width: 100%;
+    padding: 12px 100px 12px 20px; /* Espaço para os ícones à direita */
+    border-radius: 24px;
+    border: 1px solid #dfe1e5;
+    font-size: 16px;
+    outline: none;
+}
+
+#campo-busca:hover, #campo-busca:focus {
     box-shadow: 0 1px 6px rgba(32,33,36,.28);
     border-color: rgba(223,225,229,0);
 }
 
-.icone-lupa {
-    padding: 0 15px;
-    color: #9aa0a6;
-}
-
-.campo-busca-input {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    background-color: transparent;
-}
-
 .icones-busca {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
-    align-items: center;
-    padding-right: 15px;
     gap: 10px;
 }
 
-.botao-icone {
+.icone-btn {
     background: none;
     border: none;
     cursor: pointer;
-    color: #757575;
-    font-size: 18px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Botões */
-.container-botoes {
+.botoes-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
-.botao-principal, .botao-telegram, .botao-secundario {
+.btn-principal, .btn-secundario {
+    padding: 10px 20px;
+    border: none;
     border-radius: 4px;
-    padding: 10px 16px;
     font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
+    transition: background-color 0.3s ease;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    justify-content: center;
+    text-decoration: none;
 }
 
-.botao-principal {
+.btn-principal {
     background-color: #FF5722;
     color: white;
-    border: 1px solid transparent;
-    font-weight: bold;
-}
-.botao-principal:hover {
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
 }
 
-.botao-telegram {
-    background-color: #2196F3; /* Cor oficial do Telegram */
+.btn-principal:hover {
+    background-color: #E64A19;
+}
+
+.btn-secundario {
+    background-color: #0088cc;
     color: white;
-    border: 1px solid transparent;
 }
 
-.botao-secundario {
+.btn-secundario:hover {
+    background-color: #0077b3;
+}
+
+.btn-convite {
     background-color: #f8f9fa;
     border: 1px solid #f8f9fa;
+    border-radius: 4px;
     color: #3c4043;
+    font-family: arial,sans-serif;
+    font-size: 14px;
+    margin: 11px 4px;
+    padding: 10px 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 20px;
 }
-.botao-secundario:hover {
+
+.btn-convite:hover {
+    border: 1px solid #dadce0;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    border-color: #dadce0;
 }
 
 /* Área de Resultados */
 .area-resultados {
-    padding: 40px 20px;
-    background-color: #F5F5F5;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 .titulo-resultados {
@@ -166,29 +181,43 @@ body {
 
 .grid-resultados {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .card-produto {
     background-color: white;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    text-align: left;
     display: flex;
     flex-direction: column;
+    transition: box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-produto:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .card-imagem {
     width: 100%;
-    height: 280px;
+    padding-top: 100%; /* Proporção 1:1 */
+    position: relative;
+    background-color: #f5f5f5;
+}
+
+.card-imagem img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-.card-corpo {
+.card-info {
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -196,30 +225,35 @@ body {
 }
 
 .card-nome {
-    font-size: 16px;
-    color: #212121;
+    font-size: 14px;
+    line-height: 1.4;
+    height: 3.9em; /* Aproximadamente 3 linhas */
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-bottom: 10px;
-    flex-grow: 1;
 }
 
 .card-preco {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 22px;
+    font-weight: 700;
     color: #FF5722;
+    margin-top: auto; /* Empurra o preço para baixo */
     margin-bottom: 15px;
 }
 
 .card-botao {
-    display: block;
-    width: 100%;
     background-color: #FF5722;
     color: white;
     text-align: center;
     padding: 12px;
     border-radius: 4px;
+    font-weight: 700;
     text-decoration: none;
-    font-weight: bold;
-    margin-top: auto;
+    transition: background-color 0.3s ease;
+}
+
+.card-botao:hover {
+    background-color: #E64A19;
 }
 
 /* Rodapé */
@@ -228,6 +262,8 @@ body {
     color: white;
     padding: 30px 20px;
     text-align: center;
+    width: 100%;
+    flex-shrink: 0; /* Impede que o rodapé encolha */
 }
 
 .rodape-links {
@@ -240,6 +276,7 @@ body {
     margin: 0 15px;
     font-size: 14px;
 }
+
 .rodape-links a:hover {
     text-decoration: underline;
 }
