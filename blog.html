@@ -21,8 +21,7 @@
 body { font-family: var(--fonte-principal); margin: 0; padding: 0 0 100px 0; /* Adiciona espaço no final para o botão não cobrir o rodapé */ background: #f7f7f7; color: #333; }
 a { text-decoration: none; color: inherit; }
 header { background: var(--cor-principal); display: flex; align-items: center; justify-content: center; padding: 20px; color: #fff; position: sticky; top: 0; z-index: 999; }
-/* Ajuste para a nova logomarca completa */
-header amp-img { max-width: 250px; /* Limita a largura do logo */ }
+header amp-img { max-width: 250px; }
 .blog-container { max-width: 850px; margin: 40px auto; padding: 20px; }
 .breadcrumb { font-size: 0.9rem; margin-bottom: 20px; text-align: center; }
 .breadcrumb a { color: var(--cor-principal); }
@@ -50,20 +49,20 @@ footer { background: var(--cor-principal); padding: 20px; text-align: center; co
 /* --- INÍCIO DA ALTERAÇÃO NO BOTÃO --- */
 .cta-fixo {
     position: fixed;
-    bottom: 0; /* Cola no fundo */
-    left: 50%; /* Começa no meio da tela */
-    transform: translateX(-50%); /* Puxa de volta para centralizar perfeitamente */
-    width: 100%; /* Ocupa toda a largura */
-    max-width: 500px; /* Mas limita a um tamanho máximo razoável */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
     background: var(--cor-principal);
     color: #fff;
     padding: 15px;
     text-align: center;
     font-weight: bold;
     text-decoration: none;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.1); /* Sombra para cima */
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
     z-index: 1000;
-    border-top-left-radius: 10px; /* Arredonda os cantos superiores */
+    border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 /* --- FIM DA ALTERAÇÃO NO BOTÃO --- */
@@ -90,29 +89,64 @@ footer { background: var(--cor-principal); padding: 20px; text-align: center; co
 <!-- --- INÍCIO DA ALTERAÇÃO NO CABEÇALHO --- -->
 <header>
     <a href="index.html">
-        <!-- Usando a imagem correta do logo -->
         <amp-img src="imagens/logo-completa.png" width="500" height="168" layout="responsive" alt="Logo Kompara - A comparação que compensa"></amp-img>
     </a>
 </header>
 <!-- --- FIM DA ALTERAÇÃO NO CABEÇALHO --- -->
 
 <main class="blog-container">
-    <!-- O restante do conteúdo do main permanece o mesmo -->
-    <div class="breadcrumb">
-        <a href="index.html">Início</a> &raquo; <a href="blog.html">Blog</a> &raquo; Guia Shopee
+
+<div class="breadcrumb">
+    <a href="index.html">Início</a> &raquo; <a href="blog.html">Blog</a> &raquo; Guia Shopee
+</div>
+
+<article class="post-principal">
+    <h1>Guia Definitivo: Como Encontrar as Melhores Ofertas na Shopee em 2025</h1>
+    <p class="post-meta">Publicado em 03 de Setembro de 2025 por <strong>Jeferson (Kompara )</strong></p>
+
+    <amp-img src="imagens/blog-destaque-guia-shopee.png" width="850" height="400" layout="responsive" alt="Mulher feliz segurando sacolas de compras da Shopee"></amp-img>
+
+    <p>Cansado de perder promoções relâmpago? Neste guia, vamos desvendar todos os segredos para você se tornar um mestre da economia na Shopee.</p>
+
+    <h2>1. O Poder dos Cupons</h2>
+    <p>Empilhe cupons, frete grátis e moedas Shopee para economizar ainda mais.</p>
+
+    <h2>2. Kompara: Sua Arma Secreta</h2>
+    <p>Use o Kompara para comparar preços em segundos e garantir o melhor negócio.</p>
+
+    <h2>3. Estratégias Avançadas</h2>
+    <p>Planeje compras em datas promocionais e fique de olho nas ofertas relâmpago.</p>
+
+    <div class="botoes-compartilhar">
+        <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.kompara.com.br%2Fblog.html" target="_blank" class="btn-twitter">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.kompara.com.br%2Fblog.html" target="_blank" class="btn-facebook">Facebook</a>
+        <a href="https://api.whatsapp.com/send?text=Confira%20o%20guia%20definitivo%20para%20economizar%20na%20Shopee!" target="_blank" class="btn-whatsapp">WhatsApp</a>
     </div>
+</article>
 
-    <article class="post-principal">
-        <h1>Guia Definitivo: Como Encontrar as Melhores Ofertas na Shopee em 2025</h1>
-        <p class="post-meta">Publicado em 03 de Setembro de 2025 por <strong>Jeferson (Kompara )</strong></p>
-        <amp-img src="imagens/blog-destaque-guia-shopee.png" width="850" height="400" layout="responsive" alt="Mulher feliz segurando sacolas de compras da Shopee"></amp-img>
-        <p>Cansado de perder promoções relâmpago? Neste guia, vamos desvendar todos os segredos para você se tornar um mestre da economia na Shopee.</p>
-        <!-- ... resto do artigo ... -->
-    </article>
-
-    <section class="explore-mais">
-        <!-- ... seção de posts recentes ... -->
-    </section>
+<section class="explore-mais">
+    <h2>Explore Mais Dicas</h2>
+    <div class="posts-relacionados">
+        <div class="card-post">
+            <a href="post-frete.html">
+                <amp-img src="imagens/post-frete.png" width="240" height="140" layout="responsive" alt="Caixa de entrega com símbolo de frete grátis"></amp-img>
+                <div class="card-post-conteudo"><h3>5 Dicas para Economizar no Frete</h3></div>
+            </a>
+        </div>
+        <div class="card-post">
+            <a href="post-cupons.html">
+                <amp-img src="imagens/post-cupons.png" width="240" height="140" layout="responsive" alt="Tesoura cortando um cupom de desconto"></amp-img>
+                <div class="card-post-conteudo"><h3>Os Melhores Cupons de 2025</h3></div>
+            </a>
+        </div>
+        <div class="card-post">
+            <a href="post-golpes.html">
+                <amp-img src="imagens/post-golpes.png" width="240" height="140" layout="responsive" alt="Cadeado simbolizando segurança"></amp-img>
+                <div class="card-post-conteudo"><h3>Como Evitar Golpes na Shopee</h3></div>
+            </a>
+        </div>
+    </div>
+</section>
 </main>
 
 <a href="https://kompara.com.br" class="cta-fixo">Compare Agora e Economize!</a>
