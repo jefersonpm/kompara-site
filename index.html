@@ -10,55 +10,162 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" href="images/logotipo.png" type="image/png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZBYXY26TF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SZBYXY26TF');
+    </script>
+
 </head>
 <body>
 
-    <header class="cabecalho">
-        <!-- Conteúdo do cabeçalho, se houver, como "Parceiro Oficial Shopee" -->
+    <!-- Cabeçalho -->
+    <header class="cabecalho" style="background:#FF6F00; display:flex; justify-content:center; align-items:center; padding:20px;">
+        <img src="images/logo-completa.png" alt="Logomarca Kompara" class="logomarca-principal" style="height:60px; margin-right:15px;">
+        <h1 style="color:#fff; font-size:1.8rem; margin:0;">O Comparador Nº 1 de preços da Shopee!</h1>
     </header>
 
+    <!-- Área principal -->
     <div class="container-principal">
-        <div class="logo-container">
-            <img src="images/logo-completa.png" alt="Logomarca Kompara" class="logomarca-principal">
-            <h1 class="slogan">O Comparador Nº 1 de preços da Shopee!</h1>
-        </div>
-
         <div class="area-busca">
             <div class="campo-busca-container">
                 <input type="text" id="campo-busca" placeholder="Digite o nome do produto ou cole o link">
                 <div class="icones-busca">
-                    <button class="icone-btn" id="busca-voz" aria-label="Busca por voz"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"></path></svg></button>
-                    <button class="icone-btn" id="busca-imagem" aria-label="Busca por imagem"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#5f6368"><path d="M20 4v12h-4l-3.5-4.5-2.5 3-3.5-4.5-4 5V4c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2zm-2 10l-3.5-4.5-2.5 3-3.5-4.5-4 5V5c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v9zM4 22h16v-2H4v2z"></path></svg></button>
+                    <button class="icone-btn" id="busca-voz" aria-label="Busca por voz">🎤</button>
+                    <button class="icone-btn" id="busca-imagem" aria-label="Busca por imagem">📷</button>
                 </div>
             </div>
             <div class="botoes-container">
                 <button id="btn-comparar" class="btn-principal">COMPARAR PREÇOS</button>
-                <a href="https://t.me/+-NKFQy_nGutiODgx" target="_blank" id="btn-telegram" class="btn-secundario">
-                    <svg height="20" viewBox="0 0 24 24" width="20" fill="white" style="margin-right: 8px;"><path d="M9.78 18.65l.28-4.23-7.68-2.43c-.46-.14-.56-.54-.12-.82l17.56-8.98c.37-.19.72.05.55.51l-3.64 16.25c-.12.54-.57.68-.96.42l-4.42-3.27-2.13 2.05c-.23.23-.44.43-.7.43z"></path></svg>
-                    Participe do Nosso Canal
-                </a>
+                <a href="https://t.me/+-NKFQy_nGutiODgx" target="_blank" id="btn-telegram" class="btn-secundario">Participe do Nosso Canal</a>
+                <button id="btn-convidar" class="btn-convite">Convidar um amigo</button>
             </div>
-             <button id="btn-convidar" class="btn-convite">
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="currentColor" style="margin-right: 8px;"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-                Convidar um amigo
-            </button>
         </div>
     </div>
 
+    <!-- Área de resultados -->
     <div id="area-resultados" class="area-resultados" style="display: none;">
         <h2 class="titulo-resultados">Encontramos estas ofertas para você:</h2>
         <div id="grid-resultados" class="grid-resultados">
-            <!-- Os cards de produtos simulados serão inseridos aqui pelo JavaScript -->
+            <!-- Cards de produtos serão inseridos via JS -->
         </div>
     </div>
 
-    <footer class="rodape">
-        <div class="rodape-links">
-            <a href="sobre.html">Sobre Nós</a>
-            <a href="blog.html">Blog</a>
-            <a href="#">Contato</a>
-            <a href="termos-de-uso.html">Termos de Uso</a>
-            <a href="politica-de-privacidade.html">Política de Privacidade</a>
+    <!-- Seção FAQ interativa -->
+    <section id="faq" class="faq-container">
+        <h2>Perguntas Frequentes - Kompara</h2>
+
+        <div class="faq-item">
+            <h3>O Kompara é um site oficial da Shopee?</h3>
+            <p>Não. O Kompara é uma plataforma <strong>afiliada à Shopee</strong>, recebendo comissões por compras qualificadas originadas através de nossa ferramenta, conforme os termos de afiliados da Shopee.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Como funciona a comparação de preços do Kompara?</h3>
+            <p>Basta digitar o nome do produto ou colar o link da Shopee, e nossa ferramenta irá buscar automaticamente os melhores preços e ofertas disponíveis.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>O uso do Kompara é gratuito?</h3>
+            <p>Sim, nossa plataforma é <strong>100% gratuita</strong> para os usuários. Você só paga pelo produto adquirido na Shopee, como faria normalmente.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>O Kompara oferece cupons ou descontos adicionais?</h3>
+            <p>Sim, além de comparar preços, o Kompara ajuda a localizar <strong>cupons de vendedor, frete grátis e moedas Shopee</strong> para maximizar sua economia.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Como posso participar do canal do Kompara?</h3>
+            <p>Você pode acessar nosso canal no Telegram clicando no botão “Participe do Nosso Canal” na página inicial ou na área de busca.</p>
+        </div>
+    </section>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"O Kompara é um site oficial da Shopee?","acceptedAnswer":{"@type":"Answer","text":"Não. O Kompara é uma plataforma afiliada à Shopee, recebendo comissões por compras qualificadas originadas através de nossa ferramenta, conforme os termos de afiliados da Shopee."}},
+        {"@type":"Question","name":"Como funciona a comparação de preços do Kompara?","acceptedAnswer":{"@type":"Answer","text":"Basta digitar o nome do produto ou colar o link da Shopee, e nossa ferramenta irá buscar automaticamente os melhores preços e ofertas disponíveis."}},
+        {"@type":"Question","name":"O uso do Kompara é gratuito?","acceptedAnswer":{"@type":"Answer","text":"Sim, nossa plataforma é 100% gratuita para os usuários. Você só paga pelo produto adquirido na Shopee, como faria normalmente."}},
+        {"@type":"Question","name":"O Kompara oferece cupons ou descontos adicionais?","acceptedAnswer":{"@type":"Answer","text":"Sim, além de comparar preços, o Kompara ajuda a localizar cupons de vendedor, frete grátis e moedas Shopee para maximizar sua economia."}},
+        {"@type":"Question","name":"Como posso participar do canal do Kompara?","acceptedAnswer":{"@type":"Answer","text":"Você pode acessar nosso canal no Telegram clicando no botão “Participe do Nosso Canal” na página inicial ou na área de busca."}}
+      ]
+    }
+    </script>
+
+    <!-- Estilos FAQ -->
+    <style>
+        .faq-container {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .faq-container h2 {
+            font-size: 2rem;
+            color: #FF6F00;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            border-left: 4px solid #FF6F00;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .faq-item h3 {
+            font-size: 1.3rem;
+            color: #333;
+            cursor: pointer;
+            margin: 0;
+            padding: 12px 15px;
+            background: #f9f9f9;
+            transition: background 0.3s;
+        }
+        .faq-item h3:hover {
+            background: #f1f1f1;
+        }
+        .faq-item p {
+            font-size: 1rem;
+            line-height: 1.7;
+            padding: 0 15px 12px 15px;
+            margin: 0;
+            display: none;
+            color: #555;
+        }
+        .faq-item.active p {
+            display: block;
+        }
+    </style>
+
+    <!-- Script FAQ interativo -->
+    <script>
+        document.querySelectorAll('.faq-item h3').forEach((item) => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="rodape" style="background:#FF6F00; color:#fff; padding:30px 20px; text-align:center;">
+        <div class="rodape-links" style="margin-bottom:15px;">
+            <a href="sobre.html" style="color:#fff; margin:0 10px;">Sobre Nós</a>
+            <a href="blog.html" style="color:#fff; margin:0 10px;">Blog</a>
+            <a href="#" style="color:#fff; margin:0 10px;">Contato</a>
+            <a href="termos-de-uso.html" style="color:#fff; margin:0 10px;">Termos de Uso</a>
+            <a href="politica-de-privacidade.html" style="color:#fff; margin:0 10px;">Política de Privacidade</a>
         </div>
         <div class="rodape-copyright">
             <p>© 2025 Kompara - Todos os direitos reservados.</p>
@@ -66,11 +173,8 @@
         </div>
     </footer>
 
+    <!-- Script principal -->
     <script src="script.js"></script>
+
 </body>
 </html>
-
-
-
-
-
